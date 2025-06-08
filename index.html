@@ -30,23 +30,23 @@
 
                 <form class="registration-form" id="registrationForm">
                     <div class="form-group">
-                        <label for="username">
-                            <i class="fas fa-user"></i>
-                            Username
-                        </label>
-                        <div class="input-group">
-                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                            <span class="input-focus-border"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="email">
                             <i class="fas fa-envelope"></i>
                             Email
                         </label>
                         <div class="input-group">
                             <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            <span class="input-focus-border"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i>
+                            Phone Number
+                        </label>
+                        <div class="input-group">
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="1234567890" required>
                             <span class="input-focus-border"></span>
                         </div>
                     </div>
@@ -85,22 +85,11 @@
                             <textarea id="address" name="address" rows="3" placeholder="Enter your full address" required></textarea>
                             <span class="input-focus-border"></span>
                         </div>
-                    </div>
-                    <button type="button" class="location-btn" onclick="getCurrentLocation()" title="Get current location">
-                        <i class="fas fa-location-arrow"></i>
-                        <span class="location-text">Detect Location</span>
-                    </button>
-                    <div id="location-status" class="location-status"></div>
-
-                    <div class="form-group">
-                        <label for="phone">
-                            <i class="fas fa-phone"></i>
-                            Phone Number
-                        </label>
-                        <div class="input-group">
-                            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="1234567890" required>
-                            <span class="input-focus-border"></span>
-                        </div>
+                        <button type="button" class="location-btn" onclick="getCurrentLocation()" title="Get current location">
+                            <i class="fas fa-location-arrow"></i>
+                            <span class="location-text">Get Location</span>
+                        </button>
+                        <div id="location-status" class="location-status"></div>
                     </div>
 
                     <div class="terms-group">
