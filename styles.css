@@ -244,7 +244,28 @@ input:focus, textarea:focus {
 }
 
 .toggle-password:hover {
-    color: #3498db;
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.password-match {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.password-match.success {
+    color: #27ae60;
+}
+
+.password-match.error {
+    color: #e74c3c;
+}
+
+.password-match i {
+    font-size: 0.8rem;
 }
 
 .terms-group {
