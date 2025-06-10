@@ -59,10 +59,25 @@
                         <div class="input-group">
                             <input type="password" id="password" name="password" placeholder="Create a password" required>
                             <span class="input-focus-border"></span>
-                            <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <button type="button" class="toggle-password" onclick="togglePassword('password')">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <div class="input-group">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                            <span class="input-focus-border"></span>
+                            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="password-match" class="password-match"></div>
                     </div>
 
                     <div class="form-group">
@@ -144,9 +159,9 @@
         </div>
 
         <script>
-            function togglePassword() {
-                const passwordInput = document.getElementById('password');
-                const toggleButton = document.querySelector('.toggle-password i');
+            function togglePassword(fieldId) {
+                const passwordInput = document.getElementById(fieldId);
+                const toggleButton = passwordInput.parentElement.querySelector('.toggle-password i');
                 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
@@ -158,6 +173,32 @@
                     toggleButton.classList.add('fa-eye');
                 }
             }
+
+            function validatePasswordMatch() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const matchDiv = document.getElementById('password-match');
+                
+                if (confirmPassword === '') {
+                    matchDiv.innerHTML = '';
+                    matchDiv.className = 'password-match';
+                    return true;
+                }
+                
+                if (password === confirmPassword) {
+                    matchDiv.innerHTML = '<i class="fas fa-check"></i> Passwords match';
+                    matchDiv.className = 'password-match success';
+                    return true;
+                } else {
+                    matchDiv.innerHTML = '<i class="fas fa-times"></i> Passwords do not match';
+                    matchDiv.className = 'password-match error';
+                    return false;
+                }
+            }
+
+            // Add event listeners for password validation
+            document.getElementById('password').addEventListener('input', validatePasswordMatch);
+            document.getElementById('confirmPassword').addEventListener('input', validatePasswordMatch);
 
             function getCurrentLocation() {
                 const locationBtn = document.querySelector('.location-btn');
@@ -244,6 +285,12 @@
             document.getElementById('registrationForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                // Validate password match
+                if (!validatePasswordMatch()) {
+                    alert('Please make sure both passwords match before submitting.');
+                    return;
+                }
+                
                 // Here you would typically send the form data to your server
                 // For now, we'll just show the success message
                 
@@ -256,6 +303,9 @@
                 setTimeout(() => {
                     showSuccessModal();
                     this.reset(); // Reset the form
+                    // Clear password match message
+                    document.getElementById('password-match').innerHTML = '';
+                    document.getElementById('password-match').className = 'password-match';
                 }, 1000);
             });
 
